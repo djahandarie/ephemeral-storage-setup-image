@@ -34,18 +34,18 @@ subjects:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: disk-setup
+  name: disk-setup-swap
   namespace: disk-setup
   labels:
-    app: materialize-disk-setup
+    app: materialize-disk-setup-swap
 spec:
   selector:
     matchLabels:
-      app: materialize-disk-setup
+      app: materialize-disk-setup-swap
   template:
     metadata:
       labels:
-        app: materialize-disk-setup
+        app: materialize-disk-setup-swap
     spec:
       securityContext:
         runAsNonRoot: false
@@ -58,7 +58,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: materialize.cloud/disk
+              - key: materialize.cloud/swap
                 operator: In
                 values: ["true"]
       tolerations:
