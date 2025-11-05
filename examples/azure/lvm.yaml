@@ -34,18 +34,18 @@ subjects:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: disk-setup
+  name: disk-setup-scratchfs
   namespace: disk-setup
   labels:
-    app: materialize-disk-setup
+    app: materialize-disk-setup-scratchfs
 spec:
   selector:
     matchLabels:
-      app: materialize-disk-setup
+      app: materialize-disk-setup-scratchfs
   template:
     metadata:
       labels:
-        app: materialize-disk-setup
+        app: materialize-disk-setup-scratchfs
     spec:
       securityContext:
         runAsNonRoot: false
@@ -58,7 +58,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: materialize.cloud/disk
+              - key: materialize.cloud/scratch-fs
                 operator: In
                 values: ["true"]
       tolerations:
